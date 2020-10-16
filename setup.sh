@@ -1,5 +1,22 @@
 PATH_=$HOME/.transferpi
 
+create_service(){
+    UNIT=./$1.service
+    echo "[Unit]" >> $UNIT;
+    echo "Description=Transfer Pi : $2" >> $UNIT;
+    echo "After=multi-user.target" >> $UNIT;
+    echo "" >> $UNIT; 
+    echo "[Service]" >> $UNIT;
+    echo "Type=simple" >> $UNIT;
+    echo "ExecStart=$HOME/.transferpi/bin/$1" >> $UNIT;
+    echo "" >> $UNIT;
+    echo "[Install]" >> $UNIT;
+    echo "WantedBy=multi-user.target" >> $UNIT;
+    sudo mv $UNIT /lib/systemd/system/
+
+    echo "   |_ Service Created For $2"
+}
+
 echo "---------------------------------"
 echo "|     Installing Transfer Pi    |"
 echo "---------------------------------"
@@ -10,7 +27,7 @@ then
     rm -rf $PATH_/logs
     rm -rf $PATH_/data/templates
 else 
-    mkdir PATH_
+    mkdir $PATH_
 fi
 
 mkdir -p $PATH_/bin
@@ -33,16 +50,21 @@ mv fileserver tpi-fileserver
 mv tunnel tpi-tunnel
 
 echo "* Appending Path"
-
 if [[  "$PATH" == *"$PATH_"*  ]]
 then
     echo "   |_ Path Already There, Skipping"
 else
     echo "export PATH=\$PATH:\$HOME/.transferpi/bin" >> $HOME/.bashrc
 fi
+export PATH=$PATH:$HOME/.transferpi/bin
+
+echo "* Creating Services"
+create_service "tpi-fileserver" "Fileserver"
+create_service "tpi-tunnel" "Tunnel"
 
 echo "* Transfer Pi Installed Successfully"
 echo "* Now go to https://transferpi.tk/login"
 echo "* Login using your google account"
 echo "* Retrive config.json"
 echo "* Place it under $HOME/.transferpi/"
+
