@@ -24,10 +24,11 @@ move "%PATH_%\bin\tunnel.exe" "%PATH_%\bin\tpi-tunnel.exe"
 
 IF x%PATH_:transfer=%==x%PATH% (echo "Path Already There") ELSE (echo "Path Not There")
 
-echo.%PATH% | findstr /C:"%PATH_%\bin" 1>nul
+echo.%Path | findstr /C:"%USERPROFILE%\.transferpi\bin" 1>nul
 
 if errorlevel 1 (
-  setx PATH "%PATH%:%PATH_%\bin"
+  set 
+  setx Path "%Path%;%USERPROFILE%\.transferpi\bin"
 ) ELSE (
-  echo. "Path Already There !"
+  echo. Path Already There !
 )
