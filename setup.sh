@@ -48,6 +48,7 @@ mv list tpi-list
 mv remove tpi-remove
 mv fileserver tpi-fileserver
 mv tunnel tpi-tunnel
+mv manage tpi-manage
 
 echo "* Appending Path"
 if [[  "$PATH" == *"$PATH_"*  ]]
