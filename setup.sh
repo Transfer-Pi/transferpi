@@ -57,6 +57,7 @@ then
 else
     echo "export PATH=\$PATH:\$HOME/.transferpi/bin" >> $HOME/.bashrc
 fi
+
 export PATH=$PATH:$HOME/.transferpi/bin
 
 echo "* Creating Services"
