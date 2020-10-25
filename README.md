@@ -18,13 +18,16 @@ $ ./setup.sh
    |_ Service Created For Fileserver
    |_ Service Created For Tunnel
 * Transfer Pi Installed Successfully
-* Now go to https://transferpi.tk/login
-* Login using your google account
-* Retrive config.json
-* Place it under /home/user/.transferpi/
 ```
 
-After setting up transferpi go to https://transferpi.tk/login, login or Create account using your gmail.After successful login you'll get a config file. Place that config under .transferpi folder in your home directory.
+After setting up transferpi, run following command to download config
+
+```bash
+tpi-manage login
+
+```
+
+This will take you to transferpi's login page, You can login or create account using your google account. After signing up it'll redirect you to config page where you save or download config file.
 
 ### Usage  
 
@@ -104,3 +107,4 @@ $ tpi-get Bp9500
 |set [key=value] [type=type]   | to modify config.json  |
 |host [act=value]  | to add and remove hosts from allowed list |
 |config [options]  | prints current config  |
+|login [options]  | opens a browser window for login  |

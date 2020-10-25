@@ -65,8 +65,4 @@ create_service "tpi-fileserver" "Fileserver"
 create_service "tpi-tunnel" "Tunnel"
 
 echo "* Transfer Pi Installed Successfully"
-echo "* Now go to https://transferpi.tk/login"
-echo "* Login using your google account"
-echo "* Retrive config.json"
-echo "* Place it under $HOME/.transferpi/"
 
