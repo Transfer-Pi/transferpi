@@ -3,7 +3,7 @@
 set PATH_=%USERPROFILE%\.transferpi
 echo Installing Transfer Pi
 
-IF exist %PATH_% ( echo Removing Previous Installation && rmdir /Q/S "%PATH_%/bin" ) ELSE ( mkdir  %PATH_%  )
+IF exist %PATH_% ( echo Removing Previous Installation && rmdir /Q/S "%PATH_%\bin" ) ELSE ( mkdir  %PATH_%  )
 
 mkdir %PATH_%\bin 
 mkdir %PATH_%\data
@@ -21,6 +21,7 @@ move "%PATH_%\bin\list.exe" "%PATH_%\bin\tpi-list.exe"
 move "%PATH_%\bin\remove.exe" "%PATH_%\bin\tpi-remove.exe"
 move "%PATH_%\bin\fileserver.exe" "%PATH_%\bin\tpi-fileserver.exe"
 move "%PATH_%\bin\tunnel.exe" "%PATH_%\bin\tpi-tunnel.exe"
+move "%PATH_%\bin\manage.exe" "%PATH_%\bin\tpi-manage.exe"
 
 IF x%PATH_:transfer=%==x%PATH% (echo "Path Already There") ELSE (echo "Path Not There")
 
