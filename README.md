@@ -1,8 +1,8 @@
-### Transfer π v0.0.2a
+### Transfer π v0.0.2c
 
 > Setting up environment
 ```bash
-$ git clone https://github.com/transfer-pi/transferpi
+$ git clone --single-branch --branch=master https://github.com/transfer-pi/transferpi
 $ cd transferpi
 $ ./setup.sh
 ```
