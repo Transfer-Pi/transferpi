@@ -14,7 +14,7 @@ create_service(){
     echo "WantedBy=multi-user.target" >> $UNIT;
     sudo mv $UNIT /lib/systemd/system/
 
-    echo "   |_ Service Created For $2"
+    echo "    |_ Service Created For $2"
 }
 
 echo "---------------------------------"
@@ -51,13 +51,27 @@ mv tunnel tpi-tunnel
 mv manage tpi-manage
 
 echo "* Appending Path"
-if [[  "$PATH" == *"$PATH_"*  ]]
-then
-    echo "   |_ Path Already There, Skipping"
-else
-    echo "export PATH=\$PATH:\$HOME/.transferpi/bin" >> $HOME/.bashrc
-fi
 
+set_path(){
+    FILE=$HOME/$1
+    if [[ -f "$FILE" ]]
+    then
+        CFG=$(cat $FILE)
+        EXPORT_STRING="export PATH=\$PATH:\$HOME/.transferpi/bin"
+        if [[ "$CFG" == *"$EXPORT_STRING"* ]]
+        then 
+            echo "    |_ Path already there for $1, Skipping"
+        else
+            echo "export PATH=\$PATH:\$HOME/.transferpi/bin" >> $FILE   
+            echo "    |_ Path added to env vars"
+        fi
+    else
+        echo "    |_ File $1 does not exist !, skipping"
+    fi
+}
+
+set_path ".bashrc"
+set_path ".zshrc"
 export PATH=$PATH:$HOME/.transferpi/bin
 
 echo "* Creating Services"
