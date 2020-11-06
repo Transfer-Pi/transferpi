@@ -4,10 +4,9 @@
 ```bash
 > git clone --single-branch --branch=windows https://github.com/transfer-pi/transferpi
 > cd transferpi
-> ./setup.sh
+> setup.bat
 ```
 > Running setup will produce following output
-
 ```
 ---------------------------------
 |     Installing Transfer Pi    |
