@@ -9,7 +9,7 @@ mkdir %PATH_%\bin
 mkdir %PATH_%\data
 mkdir %PATH_%\logs 
 
-copy /b NUL "%PATH_%/logs/tunnel_logs.txt"
+copy /b NUL "%PATH_%/logs/tunnel_logs.txt" 
 copy /b NUL "%PATH_%/logs/server_logs.txt"
 
 xcopy "bin\*" "%PATH_%\bin\*" /E/H/C/I/Y/Q
@@ -23,13 +23,11 @@ move "%PATH_%\bin\fileserver.exe" "%PATH_%\bin\tpi-fileserver.exe"
 move "%PATH_%\bin\tunnel.exe" "%PATH_%\bin\tpi-tunnel.exe"
 move "%PATH_%\bin\manage.exe" "%PATH_%\bin\tpi-manage.exe"
 
-IF x%PATH_:transfer=%==x%PATH% (echo "Path Already There") ELSE (echo "Path Not There")
-
-echo.%Path | findstr /C:"%USERPROFILE%\.transferpi\bin" 1>nul
+echo.%Path% | findstr /C:"%USERPROFILE%\\.transferpi\\bin" 1>nul
 
 if errorlevel 1 (
-  set 
+  echo.Setting Path !
   setx Path "%Path%;%USERPROFILE%\.transferpi\bin"
 ) ELSE (
-  echo. Path Already There !
+  echo.Path Already There !
 )

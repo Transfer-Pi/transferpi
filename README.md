@@ -68,6 +68,26 @@ To download files using generated tokens use tpi-get.
 [*] Downloaded hello.jpg Successfully.
 ```
 
+### Private file sharing
+
+To share files privately use `-t=0` when adding the file. It'll add the file only to the local database. The file won't be downloadable using normal HTTP protocols or any kind of browsers.
+```bash
+> tpi-add file -t=0
+```
+To share a private file you might need to allow other host to access the private file. To do this you'll need to add the other host's public key to allowed hosts in your config file. To do this run following command.
+
+```bash
+> tpi-manage host add=public_key
+```
+
+Replace public_key with other host's public key.
+
+To download this file other user might need to specify file host using `-H=host_name`.
+
+```bash
+> tpi-get UEIE -H=host_name
+```
+
 ### CLI tools
 * **tpi-add**
 
