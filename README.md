@@ -23,8 +23,7 @@ $ ./setup.sh
 After setting up transferpi, run following command to download config
 
 ```bash
-tpi-manage login
-
+$ tpi-manage login
 ```
 
 This will take you to transferpi's login page, You can login or create account using your google account. After signing up it'll redirect you to config page where you save or download config file.
@@ -69,6 +68,16 @@ $ tpi-get Bp9500
 [*] Downloaded hello.jpg Successfully.
 ```
 
+### How does it work.
+
+> Creating share token
+
+![](./doc/images/create-token-exp.jpg)
+
+> Downloading file
+
+![](./doc/images/download-tpi-get.jpg)
+
 ### Private file sharing
 
 To share files privately use `-t=0` when adding the file. It'll add the file only to the local database. The file won't be downloadable using normal HTTP protocols or any kind of browsers.
@@ -90,7 +99,7 @@ To download this file other user might need to specify file host using `-H=host_
 ```
 
 ### CLI tools
-* **tpi-add**
+* **tpi-add** : Adds files to sharing list
 
 | Option   | Description  |
 |----------|--------------|
@@ -100,7 +109,21 @@ To download this file other user might need to specify file host using `-H=host_
 | --force  | force to update the file sharing list if file already exist in list |
 | --local  | use this option to share the file only locally |
 
-* **tpi-get**
+`examples`
+
+```bash
+$ tpi-add hello.jpg
+[+] file            : /home/user/path/to/hello.jpg
+[+] filename        : hello.jpg
+[+] local           : False
+[+] md5             : 5cd5bc438994143c9bf84d716f4c80f
+[+] time            : 2020-11-20 10:42:03
+[+] token           : Qxl272
+[+] type            : 1
+[+] url             : https://transferpi.tk/Qxl272
+```
+
+* **tpi-get** : To download files directly in terminal / private downloads
 
 | Option   | Description  |
 |----------|--------------|
@@ -110,14 +133,39 @@ To download this file other user might need to specify file host using `-H=host_
 | -o       | name of the output file |
 | --local  | download file locally |
 
-* **tpi-remove**
+`examples`
+
+```bash
+$ tpi-get Qxl272
+* Starting Donwnload : hello.jpg
+* |##################################################| 
+* Fetched 0.0908203125 Kbs in 0.053848 Seconds
+* Cheking MD5
+* Check Successful.
+* Downloaded hello.jpg Successfully.
+```
+
+* **tpi-remove** : Remove files from sharing list
 
 | Option   | Description  |
 |----------|--------------|
 | token    | file token  ( use ALL to remove all files from sharing list) |
 | -h       | help |
 
-* **tpi-manage**
+`examples`
+
+1. Removing specific file
+```bash
+$ tpi-remove Qxl272
+File Removed From Sharing List
+```
+2. Removing all files
+```bash
+$ tpi-remove ALL
+Table Emptied Sucessfully
+```
+
+* **tpi-manage** : Manipulate different services / configurations
 
 | Option   | Description  |
 |----------|--------------|
@@ -128,3 +176,56 @@ To download this file other user might need to specify file host using `-H=host_
 |host [act=value]  | to add and remove hosts from allowed list |
 |config [options]  | prints current config  |
 |login [options]  | opens a browser window for login  |
+
+`examples`
+
+1. starting / restarting / stopping services
+
+```bash
+$ tpi-manage start fileserver
+$ tpi-manage restart fileserver
+$ tpi-manage stop fileserver
+```
+
+2. Changing config
+
+```bash
+$ tpi-manage set server_config:remote:port=8080 type=int
+```
+
+3. Adding host to allowed list
+```bash
+$ tpi-manage host add=public_key
+```
+
+
+### The config.json
+
+```json
+{
+    "subdomain" : "vptl185", // Username used for reverse proxy URL -> Do not change this
+    "account_keys" : {             // Do not change these
+        "private" : "private key", // Private API key  
+        "public" : "private key"   // Public API key
+    },
+    "allowed_hosts" : [
+            "a","list","of","allowed","hosts",
+            "for","private","file","access"
+         ], // These can be changed through tpi-manage
+    "server_config" : {               // Config for various servers -> change these as your needs
+        "remote" : {                  // Proxy server config
+            "host" : "tpialpha.tk",   
+            "port" : 80,
+        },
+        "local" : {                  // Fileserver config -> change these as your needs
+            "host" : 0.0.0.0,
+            "port" : 2121,
+            "n_pools" : 5,
+            "chunk_size" : 512      
+        },
+        "web" : {                   // Web / Auth / DB server 
+            "host" : "https://transferpi.tk"
+        },
+    }
+}
+```
