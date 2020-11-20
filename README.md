@@ -1,4 +1,6 @@
-### Transfer π v0.0.2c
+### Transfer π v0.0.2d
+
+**This branch contians unix based distribution binaries for windows swtich to windows banch.**
 
 > Setting up environment
 ```bash
@@ -201,7 +203,7 @@ $ tpi-manage host add=public_key
 
 ### The config.json
 
-```json
+```js
 {
     "subdomain" : "vptl185", // Username used for reverse proxy URL -> Do not change this
     "account_keys" : {             // Do not change these

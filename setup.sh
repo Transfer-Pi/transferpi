@@ -13,7 +13,6 @@ create_service(){
     echo "[Install]" >> $UNIT;
     echo "WantedBy=multi-user.target" >> $UNIT;
     sudo mv $UNIT /lib/systemd/system/
-
     echo "    |_ Service Created For $2"
 }
 
