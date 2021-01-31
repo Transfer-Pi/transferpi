@@ -7,7 +7,8 @@ IF exist %PATH_% ( echo Removing Previous Installation && rmdir /Q/S "%PATH_%\bi
 
 mkdir %PATH_%\bin 
 mkdir %PATH_%\data
-mkdir %PATH_%\logs 
+mkdir %PATH_%\logs
+mkdir %PATH_%\service 
 
 copy /b NUL "%PATH_%/logs/tunnel_logs.txt" 
 copy /b NUL "%PATH_%/logs/server_logs.txt"
@@ -22,6 +23,7 @@ move "%PATH_%\bin\remove.exe" "%PATH_%\bin\tpi-remove.exe"
 move "%PATH_%\bin\fileserver.exe" "%PATH_%\bin\tpi-fileserver.exe"
 move "%PATH_%\bin\tunnel.exe" "%PATH_%\bin\tpi-tunnel.exe"
 move "%PATH_%\bin\manage.exe" "%PATH_%\bin\tpi-manage.exe"
+move "%PATH_%\bin\config.exe" "%PATH_%\bin\tpi-config.exe"
 
 echo.%Path% | findstr /C:"%USERPROFILE%\\.transferpi\\bin" 1>nul
 
