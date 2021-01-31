@@ -31,6 +31,7 @@ fi
 
 mkdir -p $PATH_/bin
 mkdir -p $PATH_/logs
+mkdir -p $PATH_/service
 mkdir -p $PATH_/data
 mkdir -p $PATH_/data/templates
 
