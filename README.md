@@ -1,10 +1,10 @@
-### Transfer π v0.0.2d
+### Transfer π v1.0.0
 
 **This branch contians unix based distribution binaries for windows swtich to windows banch.**
 
 > Setting up environment
 ```bash
-$ git clone --single-branch --branch=master https://github.com/transfer-pi/transferpi
+$ git clone --single-branch --branch=linux --recursive https://github.com/transfer-pi/transferpi
 $ cd transferpi
 $ ./setup.sh
 ```

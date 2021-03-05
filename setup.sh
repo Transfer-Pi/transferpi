@@ -49,6 +49,7 @@ mv remove tpi-remove
 mv fileserver tpi-fileserver
 mv tunnel tpi-tunnel
 mv manage tpi-manage
+mv config tpi-config
 
 echo "* Appending Path"
 
