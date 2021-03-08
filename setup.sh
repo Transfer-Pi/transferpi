@@ -46,12 +46,23 @@ mv add tpi-add
 mv get tpi-get
 mv list tpi-list
 mv remove tpi-remove
-mv fileserver tpi-fileserver
 mv tunnel tpi-tunnel
 mv manage tpi-manage
 mv config tpi-config
 
-echo "* Appending Path"
+
+echo "[Unit]" > /lib/systemd/system/tpi-tunnel.service
+echo "Description=Transfer Pi Web Server" >> /lib/systemd/system/tpi-tunnel.service
+echo "After=multi-user.target" >> /lib/systemd/system/tpi-tunnel.service
+echo "Conflicts=getty@tty1.service" >> /lib/systemd/system/tpi-tunnel.service
+echo "" >> /lib/systemd/system/tpi-tunnel.service
+echo "[Service]" >> /lib/systemd/system/tpi-tunnel.service
+echo "Type=simple" >> /lib/systemd/system/tpi-tunnel.service
+echo "ExecStart=$PATH_/bin/tpi-tunnel" >> /lib/systemd/system/tpi-tunnel.service
+echo "StandardInput=tty-force" >> /lib/systemd/system/tpi-tunnel.service
+echo "" >> /lib/systemd/system/tpi-tunnel.service
+echo "[Install]" >> /lib/systemd/system/tpi-tunnel.service
+echo "WantedBy=multi-user.target" >> /lib/systemd/system/tpi-tunnel.service
 
 set_path(){
     FILE=$HOME/$1
@@ -71,6 +82,7 @@ set_path(){
     fi
 }
 
+echo "* Appending Path"
 set_path ".bashrc"
 set_path ".zshrc"
 export PATH=$PATH:$HOME/.transferpi/bin
